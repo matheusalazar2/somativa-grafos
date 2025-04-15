@@ -3,10 +3,12 @@ import java.util.Objects;
 public class Livro {
     private String titulo;
     private String autor;
+    private String genero;
 
-    public Livro(String titulo, String autor) {
+    public Livro(String titulo, String autor, String genero) {
         this.titulo = titulo;
         this.autor = autor;
+        this.genero = genero;
     }
 
     public String getTitulo() {
@@ -17,9 +19,13 @@ public class Livro {
         return autor;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
     @Override
     public String toString() {
-        return titulo + " - " + autor;
+        return "\"" + titulo + "\" por " + autor + " [" + genero + "]";
     }
 
     @Override

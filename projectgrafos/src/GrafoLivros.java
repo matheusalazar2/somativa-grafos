@@ -16,14 +16,6 @@ public class GrafoLivros {
         grafo.get(origem).add(recomendado);
     }
 
-    public void mostrarGrafo() {
-        for (Livro livro : grafo.keySet()) {
-            System.out.println("Livro: " + livro);
-            System.out.println("Recomendações: " + grafo.get(livro));
-            System.out.println();
-        }
-    }
-
     public Set<Livro> recomendarLivros(Livro livroLido, int profundidade) {
         Set<Livro> recomendacoes = new HashSet<>();
         Set<Livro> visitados = new HashSet<>();
@@ -54,5 +46,13 @@ public class GrafoLivros {
         }
 
         return recomendacoes;
+    }
+
+    public void mostrarGrafo() {
+        for (Livro livro : grafo.keySet()) {
+            System.out.println("Livro: " + livro);
+            System.out.println("Recomendações: " + grafo.get(livro));
+            System.out.println();
+        }
     }
 }
