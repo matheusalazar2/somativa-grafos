@@ -210,7 +210,10 @@ public class LibraryMenu {
         library.returnBook(title);
     }
 
-
+    /**
+     * Busca e Mostra recomendacoes de livros com base no algoritmo de Dijkstra
+     * a partir do nome do livro
+     */
     private void showShortestPaths() {
         System.out.print("Enter the title of the book: ");
         String title = scanner.nextLine();

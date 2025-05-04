@@ -17,7 +17,8 @@ public class Library {
     /** Mapa de recomendações baseado no gênero dos livros */
     private Map<Book, Set<Book>> recommendations;
 
-    Map<Book, Integer> distances;
+    /** Mapa de distancia dos livros */
+    private Map<Book, Integer> distances;
 
     /**
      * Construtor. Inicializa a biblioteca com livros padrão.
@@ -220,6 +221,10 @@ public class Library {
         }
     }
 
+    /**
+     * Faz a busca de livros pelas recomendacoroes usando o algoritmo de Dijkstra
+     * @param bookQueue fila auxiliar para a busca de livros.
+     */
     public Map<Book, Integer> simpleDijkstra(Book source) {
 
         Queue<Book> bookQueue = new LinkedList<>();
@@ -242,6 +247,9 @@ public class Library {
         return distances;
     }
 
+    /**
+     * Mostra recomendações usando o metodo simpleDijkstra
+     */
     public void showShortestPathsFrom(String title) {
         Book source = null;
         for (Book book : bookLinkedList) {
