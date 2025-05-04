@@ -103,6 +103,7 @@ public class LibraryMenu {
             System.out.println("2. Request book (enter waitlist)");
             System.out.println("3. Show book recommendations");
             System.out.println("4. Return a book");
+            System.out.println("5. Show shortest recommendation paths");
             System.out.println("9. Return to main menu");
             System.out.print("Choose an option: ");
 
@@ -115,6 +116,7 @@ public class LibraryMenu {
                     case 2 -> addToWaitlist(userName);  // Solicita um livro e entra na fila de espera
                     case 3 -> showRecommendations(userName); // Mostra recomendações de livros
                     case 4 -> returnBook();             // Devolve um livro
+                    case 5 -> showShortestPaths();      // Busca pelo algoritmo de Dijkstra
                     case 9 -> System.out.println("Returning to main menu...");
                     default -> System.out.println("Invalid option.");
                 }
@@ -206,5 +208,12 @@ public class LibraryMenu {
         System.out.print("Enter the title of the book: ");
         String title = scanner.nextLine();
         library.returnBook(title);
+    }
+
+
+    private void showShortestPaths() {
+        System.out.print("Enter the title of the book: ");
+        String title = scanner.nextLine();
+        library.showShortestPathsFrom(title);
     }
 }

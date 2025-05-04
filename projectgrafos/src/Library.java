@@ -17,6 +17,8 @@ public class Library {
     /** Mapa de recomendações baseado no gênero dos livros */
     private Map<Book, Set<Book>> recommendations;
 
+    Map<Book, Integer> distances;
+
     /**
      * Construtor. Inicializa a biblioteca com livros padrão.
      */
@@ -25,6 +27,7 @@ public class Library {
         waitlist = new LinkedList<>();
         userHistory = new HashMap<>();
         recommendations = new HashMap<>();
+        distances = new HashMap<>();
         seedBooks();
     }
 
@@ -214,6 +217,51 @@ public class Library {
             System.out.println("No recent activity.");
         } else {
             showRecommendationsByTitle(history.getLast().getTitle());
+        }
+    }
+
+    public Map<Book, Integer> simpleDijkstra(Book source) {
+
+        Queue<Book> bookQueue = new LinkedList<>();
+
+        distances.put(source, 0);
+        bookQueue.add(source);
+
+        while (!bookQueue.isEmpty()) {
+            Book current = bookQueue.poll();
+            int currentDistance = distances.get(current);
+
+            for (Book neighbor : recommendations.getOrDefault(current, new HashSet<>())) {
+                if (!distances.containsKey(neighbor)) {
+                    distances.put(neighbor, currentDistance + 1);
+                    bookQueue.add(neighbor);
+                }
+            }
+        }
+
+        return distances;
+    }
+
+    public void showShortestPathsFrom(String title) {
+        Book source = null;
+        for (Book book : bookLinkedList) {
+            if (book.getTitle().equalsIgnoreCase(title)) {
+                source = book;
+                break;
+            }
+        }
+
+        if (source == null) {
+            System.out.println("Book not found.");
+            return;
+        }
+
+        Map<Book, Integer> distances = simpleDijkstra(source);
+        System.out.println("Shortest paths from: " + source.getTitle());
+        for (Map.Entry<Book, Integer> entry : distances.entrySet()) {
+            if (!entry.getKey().equals(source)) {
+                System.out.println("- " + entry.getKey().getTitle() + " (distance: " + entry.getValue() + ")");
+            }
         }
     }
 
